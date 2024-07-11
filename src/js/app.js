@@ -29,18 +29,41 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
+  const fullName = (variables.name || "") + " " + (variables.lastName || "");
+  const jobRole = variables.role;
+  const whereFrom = variables.city + ", " + variables.country;
+
+  function CheckforCom(webaddress) {
+    if (webaddress == null) {
+      return;
+    }
+    for (let i = 0; i < webaddress.length; i++) {
+      if (
+        webaddress[i] == "c" &&
+        webaddress[i + 1] == "o" &&
+        webaddress[i + 2] == "m"
+      ) {
+        return webaddress;
+      }
+      return "google.com";
+    }
+  }
+  const twitterLink = CheckforCom(variables.twitter);
+  const gitthubLink = CheckforCom(variables.github);
+  const linkedinLink = CheckforCom(variables.linkedin);
+  const instaLink = CheckforCom(variables.instagram);
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
+          <h1>${fullName}</h1>
+          <h2>${jobRole}</h2>
+          <h3>${whereFrom}</h3>
           <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+            <li><a target="_blank" href="https://${twitterLink}"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://${gitthubLink}"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://${linkedinLink}"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://${instaLink}"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
