@@ -48,10 +48,10 @@ function render(variables = {}) {
       return "google.com";
     }
   }
-  const twitterLink = CheckforCom(variables.twitter);
-  const gitthubLink = CheckforCom(variables.github);
-  const linkedinLink = CheckforCom(variables.linkedin);
-  const instaLink = CheckforCom(variables.instagram);
+  const twitterLink = variables.twitter;
+  const gitthubLink = variables.github;
+  const linkedinLink = variables.linkedin;
+  const instaLink = variables.instagram;
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
